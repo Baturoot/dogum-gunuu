@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Emirhan'a Doğum Günü</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffe6f0; /* Pastel pembe arka plan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  h1 {
+    color: #ff1493;
+    margin-bottom: 30px;
+  }
+
+  #openBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+  }
+
+  /* Zarf şekli */
+  .envelope {
+    width: 300px;
+    height: 180px;
+    background: #ffb6c1; /* Pembe zarf */
+    position: relative;
+    margin: 30px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transition: transform 0.5s;
+  }
+
+  /* Zarf kapağı */
+  .envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 90px solid #ff69b4; /* Kapağın rengi koyu pembe */
+    border-radius: 0 0 10px 10px;
+    transition: all 0.5s;
+  }
+
+  .envelope.opened::before {
+    transform: rotateX(180deg);
+    opacity: 0;
+  }
+
+  /* Mektup */
+  #letter {
+    display: none;
+    width: 260px;
+    padding: 20px;
+    background: #fff0f5;
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    animation: slideIn 1s ease forwards;
+  }
+
+  /* Pasta resmi */
+  #letter img {
+    width: 150px;
+    margin: 20px auto;
+    display: block;
+  }
+
+  /* Kutlayalım butonu */
+  #celebrateBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff1493;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  #finalMessage {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff1493;
+  }
+
+  /* Mektup animasyonu */
+  @keyframes slideIn {
+    from {transform: translateY(-50px); opacity:0;}
+    to {transform: translateY(0); opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<h1>Welcome!</h1>
+<button id="openBtn">Open</button>
+
+<div id="envelope" class="envelope" style="display:none;"></div>
+
+<div id="letter">
+  <p>Sevgili Emirhan,</p>
+  <p>Doğum günün kutlu olsun! 🎉</p>
+  <p>Bu özel gününde mutluluk, sağlık ve neşe dolu anlar yaşamanı diliyorum. Her yeni yaşın sana güzel sürprizler getirsin!</p>
+  <img src="emirhan_pasta.jpg" alt="Doğum Günü Pastası" style="width:150px; margin:20px auto; display:block;">
+  <button id="celebrateBtn">Kutlayalım</button>
+</div>
+
+<div id="finalMessage"></div>
+
+<script>
+  const openBtn = document.getElementById('openBtn');
+  const envelope = document.getElementById('envelope');
+  const letter = document.getElementById('letter');
+  const celebrateBtn = document.getElementById('celebrateBtn');
+  const finalMessage = document.getElementById('finalMessage');
+
+  // Open butonuna basınca zarf çıkar
+  openBtn.addEventListener('click', () => {
+    openBtn.style.display = 'none';
+    envelope.style.display = 'block';
+  });
+
+  // Zarfı açınca mektup ve pasta görünür
+  envelope.addEventListener('click', () => {
+    envelope.classList.add('opened');
+    setTimeout(() => {
+      envelope.style.display = 'none';
+      letter.style.display = 'block';
+    }, 600); // zarf açılma animasyonu
+  });
+
+  // Kutlayalım butonuna basınca final mesaj
+  celebrateBtn.addEventListener('click', () => {
+    letter.style.display = 'none';
+    finalMessage.textContent = "İyi ki doğdun, Emirhan! 🎂🥳";
+  });
+</script>
+
+</body>
+</html>
